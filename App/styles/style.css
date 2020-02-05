@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+tbody::-webkit-scrollbar {
+    display: none;
+}
+
+
+.hidden {
+    display: none;
+}
+
+.btn {
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 10px;
+    border: 2px solid #F8B423;
+    outline: none;
+}
+
+.size {
+    font-size: 14px;
+    height: 50px;
+}
+
+.submit {
+    height: 50px;
+}
+
+button,
+select {
+    font-size: 16px;
+    background-color: #F8B423 !important;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .25px;
+    color: black !important;
+    border-radius: 10px;
+    width: 100%;
+    height: 50px;
+    border: 1px solid #F8B423 !important;
+    cursor: pointer;
+}
+
+select {
+    text-transform: none !important;
+}
+
+.error:first-letter {
+    text-transform: uppercase !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.link {
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    letter-spacing: 1px;
+    text-decoration: none !important;
+}
+
+hr {
+    border: 1px solid white;
+}
+
+
+input,
+textarea {
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 10px !important;
+}
+
+input {
+    height: 50px !important;
+}
+
+.submit {
+    height: 60px !important;
+}
+
+#phone-number,
+#receiver-phone {
+    pointer-events: none;
+}
+
+.disabled {
+    background: lightgrey;
+}
+
+a {
+    cursor: pointer;
+}
+
+a,
+span,
+label,
+td,
+h6 {
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: 1px;
+    color: white;
+}
+
+.dropdown-item {
+    color: black !important;
+}
+
+.dropdown-item span {
+    color: black;
+    pointer-events: none;
+}
+
+tr {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #F8B423;
+}
+
+tbody {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    overflow: auto;
+}
+
+td {
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.main-content {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url("../images/image.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+    top: 0;
+}
+
+.main-content div .create-account {
+    width: 300px;
+    padding: 15px;
+    background: #F8B423;
+    color: black;
+    text-transform: uppercase;
+    font-family: 'Montserrat',
+        sans-serif;
+}
+
+nav {
+    z-index: 10;
+    background: transparent;
+    border-bottom: 1px solid #F8B423;
+}
+
+nav a h2 {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1px;
+    color: #F8B423;
+
+}
+
+.jumbotron {
+    width: 100%;
+    margin-top: 73px !important;
+    height: calc(100vh - 73px);
+    background: transparent;
+}
