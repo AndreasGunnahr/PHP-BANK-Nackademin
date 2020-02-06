@@ -5,9 +5,6 @@
         header('Location: index.php');
     }
 
-    include_once './includes/autoloader.php';
-    spl_autoload_register('myAutoLoader');
-
     use Input\Input;
     use Token\Token;
 

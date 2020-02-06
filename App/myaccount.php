@@ -1,9 +1,3 @@
-<?php
-    include_once './includes/autoloader.php';
-    spl_autoload_register('myAutoLoader');
-
-    ?>
-
 
 <?php include './includes/header.php'; ?>
 <section class = "main-content">

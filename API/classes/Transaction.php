@@ -16,21 +16,7 @@ class SwishPayment extends TransactionBase implements TransactionInterface
 
     public function createTransaction($db, $data)
     {
-        $to_user = $db->getAccount(array($data['receiver']));
-        $from_user = $db->getAccount(array($_SESSION['user']));
-        $db->setTransaction(array(
-            $data['amount'],
-            $from_user['account_id'],
-            $from_user['currency'],
-            $this->getRate($data['amount'], $from_user['currency'], $to_user['currency']),
-            $to_user['account_id'],
-            $to_user['currency'],
-            $this->rate,
-        ));
-
-        $this->setError('Successful payment!');
-
-        return true;
+        return $this->checkTransfer($db, $data);
     }
 }
 
@@ -43,22 +29,7 @@ class AccountPayment extends TransactionBase implements TransactionInterface
 
     public function createTransaction($db, $data)
     {
-        $to_user = $db->getAccount(array($data['receiver']));
-        $from_user = $db->getAccount(array($_SESSION['user']));
-
-        $db->setTransaction(array(
-            $data['amount'],
-            $from_user['account_id'],
-            $from_user['currency'],
-            $this->getRate($data['amount'], $from_user['currency'], $to_user['currency']),
-            $to_user['account_id'],
-            $to_user['currency'],
-            $this->rate,
-        ));
-
-        $this->setError('Successful payment!');
-
-        return true;
+        return $this->checkTransfer($db, $data);
     }
 }
 
@@ -93,34 +64,40 @@ class TransactionBase
 
     public function checkBalance($db, $data)
     {
-        if (empty($data['amount'])) {
-            $this->setError('Amount is required');
+        try {
+            if (empty($data['amount'])) {
+                throw new Exception('Amount is required', E_USER_ERROR);
+            } elseif (empty($data['receiver'])) {
+                throw new Exception('Receiver is required', E_USER_ERROR);
+            } else {
+                $balance = $db->getBalance(array($_SESSION['id']));
+                if ((intval($balance[0]['balance']) - intval($data['amount'])) < 0) {
+                    throw new Exception('Invalid amount to transfer', E_USER_ERROR);
+                }
 
-            return false;
-        } elseif (empty($data['receiver'])) {
-            $this->setError('Receiver is required');
-
-            return false;
-        } else {
-            $balance = $db->getBalance(array($_SESSION['id']));
-            if ((intval($balance[0]['balance']) - intval($data['amount'])) < 0) {
-                $this->setError('Invalid amount to transfer.');
-
-                return false;
+                return true;
             }
-
-            return true;
+        } catch (Exception $e) {
+            trigger_error($e->getMessage(), E_USER_ERROR);
         }
     }
 
-    public function setError($error)
+    public function checkTransfer($db, $data)
     {
-        $this->error = $error;
-    }
+        $to_user = $db->getAccount(array($data['receiver']));
+        $from_user = $db->getAccount(array($_SESSION['user']));
 
-    public function getError()
-    {
-        return $this->error;
+        $db->setTransaction(array(
+                $data['amount'],
+                $from_user['account_id'],
+                $from_user['currency'],
+                $this->getRate($data['amount'], $from_user['currency'], $to_user['currency']),
+                $to_user['account_id'],
+                $to_user['currency'],
+                $this->rate,
+            ));
+
+        return true;
     }
 
     public function getRate($amount = null, $from_currency, $to_currency)

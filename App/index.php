@@ -1,10 +1,7 @@
 <?php
-    include_once './includes/autoloader.php';
-    spl_autoload_register('myAutoLoader');
-
     use Session\Session;
 
-    ?>
+?>
 
 
 <?php include './includes/header.php'; ?>

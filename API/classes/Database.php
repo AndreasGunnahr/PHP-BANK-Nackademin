@@ -1,11 +1,23 @@
 <?php
 
+require '../App/vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable('../App');
+$dotenv->load();
+
 class Database
 {
-    private static $host = '127.0.0.1';
-    private static $dbName = 'bank';
-    private static $username = 'root';
-    private static $password = 'gunnahr';
+    private static $host;
+    private static $dbName;
+    private static $username;
+    private static $password;
+
+    public function __construct()
+    {
+        self::$host = $_ENV['DB_HOST'];
+        self::$dbName = $_ENV['DB_DATABASE'];
+        self::$username = $_ENV['DB_USER'];
+        self::$password = $_ENV['DB_PASS'];
+    }
 
     private static function connect()
     {
@@ -41,12 +53,19 @@ class Database
 
     public static function getBalance($params = array())
     {
-        $query = 'SELECT v.balance, a.currency FROM vw_users v
-                    INNER JOIN account a ON  a.id = v.account_id 
-                WHERE v.id = ?';
-        $data = self::GET($query, $params);
-
-        return $data;
+        try {
+            $query = 'SELECT v.balance, a.currency FROM vw_users v
+                        INNER JOIN account a ON  a.id = v.account_id 
+                    WHERE v.id = ?';
+            $data = self::GET($query, $params);
+            if (!empty($data)) {
+                return $data;
+            } else {
+                throw new Exception('Balance not found.');
+            }
+        } catch (Exception $e) {
+            $e->getMessage();
+        }
     }
 
     public static function getReceivers($params = array())

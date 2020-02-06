@@ -4,10 +4,18 @@ namespace Db;
 
 class Database
 {
-    private static $host = '127.0.0.1';
-    private static $dbName = 'bank';
-    private static $username = 'root';
-    private static $password = 'gunnahr';
+    private static $host;
+    private static $dbName;
+    private static $username;
+    private static $password;
+
+    public function __construct()
+    {
+        self::$host = $_ENV['DB_HOST'];
+        self::$dbName = $_ENV['DB_DATABASE'];
+        self::$username = $_ENV['DB_USER'];
+        self::$password = $_ENV['DB_PASS'];
+    }
 
     private static function connect()
     {
