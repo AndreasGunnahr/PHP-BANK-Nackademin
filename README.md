@@ -1,7 +1,3 @@
-# php-api-bank
-
-PHP course - Exercise 3 Bank application with transactions API and login.
-
 # Exercise 3 - Bank application with transaction API and login
 
 PHP course - Exercise 3 in our school course.
@@ -19,7 +15,7 @@ Install PHP and possibly some type of server/apache (MAMP or XAMPP) to run the a
 ```
 
 ```
-You will need [Composer](https://getcomposer.org/) to install .env support
+You will need Composer (See section "Built With") to install .env support
 ```
 
 ### Installing
@@ -31,7 +27,7 @@ Git clone https://github.com/AndreasGunnahr/php-api-bank.git
 ```
 
 ```
-cd App (change path to folder App) and create a .env file
+Go into the "App" folder and create an .env file
 ```
 
 ```
@@ -48,7 +44,7 @@ composer require --dev phpdotenv
 ```
 
 ```
-You are now ready to run your application!
+You are now ready to run the application!
 ```
 
 ## Built With
@@ -56,7 +52,7 @@ You are now ready to run your application!
 - [PHP](https://www.php.net/) - Used for both mostly backend development
 - [Javascript](https://www.javascript.com/) - Used for Ajax calls to our API
 - [Composer](https://getcomposer.org/) - Used to handle .env support in PHP
-  \* [Bootstrap](https://getbootstrap.com/) - Used for a fast and easy styling
+- [Bootstrap](https://getbootstrap.com/) - Used for a fast and easy styling
 
 ## Authors
 
